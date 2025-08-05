@@ -1,23 +1,18 @@
 function sendMessage() {
-  const input = document.getElementById("message");
-  const chatBox = document.getElementById("chat-box");
   const user = document.getElementById("user").value;
-  const message = input.value.trim();
+  const messageInput = document.getElementById("message");
+  const messageText = messageInput.value.trim();
+  const chatBox = document.getElementById("chat-box");
 
-  if (message !== "") {
-    const msgElem = document.createElement("div");
-    msgElem.classList.add("message");
+  if (messageText === "") return;
 
-    if (user === "User 1") {
-      msgElem.classList.add("user1");
-      msgElem.textContent = "User 1: " + message;
-    } else {
-      msgElem.classList.add("user2");
-      msgElem.textContent = "User 2: " + message;
-    }
+  const messageDiv = document.createElement("div");
+  messageDiv.classList.add("message");
+  messageDiv.classList.add(user === "User 1" ? "user1" : "user2");
+  messageDiv.textContent = `${user}: ${messageText}`;
 
-    chatBox.appendChild(msgElem);
-    chatBox.scrollTop = chatBox.scrollHeight;
-    input.value = "";
-  }
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  messageInput.value = "";
 }
